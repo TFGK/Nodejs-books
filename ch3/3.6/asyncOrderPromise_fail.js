@@ -1,8 +1,8 @@
-const fs = require('fs');
+onst fs = require('fs');
 const boolean = true;
 const promise = new Promise((res, rej) => {
     if (boolean) {
-        res(fs.readFile('3.6/readme2.txt', (err, data) => {
+        res(fs.readFile('ch3/3.6/readme2.txt', (err, data) => {
             if (err) {
                 throw err;
             }
@@ -16,7 +16,7 @@ const promise = new Promise((res, rej) => {
 promise
     .then((t1) => {
         return new Promise((res, rej) => {
-            res(fs.readFile('3.6/readme2.txt', (err,data) => {
+            res(fs.readFile('ch3/3.6/readme2.txt', (err,data) => {
                 if(err){
                     throw err;
                 }
@@ -27,7 +27,7 @@ promise
     })
     .then((t2) => {
         return new Promise((res, rej) => {
-            res(fs.readFile('3.6/readme2.txt', (err, data) => {
+            res(fs.readFile('ch3/3.6/readme2.txt', (err, data) => {
                 if(err) {
                     throw err;
                 }

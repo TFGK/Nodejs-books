@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    title=title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    link(rel='stylesheet', href='/main.css')
+  body
+    // Header
+    header#header.alt
+      .logo
+        a(href='main')
+          title=title
+          span by 2-WDJ
+      a.toggle(href='#menu')
+        span Menu
+    // Nav
+    nav#menu
+      ul.links
+        li
+          a(href='main') Home
+        li
+          a(href='profile') Profile
+        li
+          a(href='contents') Contents
+    section#profile
+        h1 조원 소개
+        br
+        a.profile_name.profile1(href='#one') 김주현
+        br
+        a.profile_name.profile2(href='#two') 김동환
+        br
+        a.profile_name.profile3(href='#three') 김도은
+        br
+        a.profile_name.profile4(href='#four') 윤시훈
+        br
+    section#img
+      .input
+        form(id="profile-form" action="/post" method="post" enctype="multipart/form-data")
+          p
+            | 사진 : 
+            input(type='file')
+          p 
+            input(type="submit", value="제출")
+      img(src="img", alt="")
+    
+
+        
+      

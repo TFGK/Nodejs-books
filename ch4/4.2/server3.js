@@ -5,13 +5,9 @@ const http = require('http');
 const parseCookies = (cookie = '') =>
     cookie  // 메서드 체인방식 = .(메소드) 로 실행하는 방식
         .split(';')
-        .map(v => v.split('=')
-            console.log("v: "+v);
-        )     //['mycookie', 'test'] 
-        .map(([k, ...vs]) => [k, vs.join('=')]
-            console.log("K: "+k);
-            console.log("vs: "+vs);
-        )     //['mycookie', 'test']
+        .map(v => v.split('='))
+        .map(([k, ...vs]) => [k, vs.join('=')])
+             //['mycookie', 'test']
         .reduce((acc, [k, v]) => {
             acc[k.trim()] = decodeURIComponent(v);  //한글때문에 넣음
             //연관배열 = 객체와 같다

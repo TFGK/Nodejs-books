@@ -9,7 +9,7 @@ const interval = setInterval(() => {
 const timeout2 = setTimeout(() => {
     console.log('실행되지 않습니다 timeout2');
 }, 15000);
-
+    
 setTimeout(() => {
     clearTimeout(timeout2);
     clearInterval(interval);

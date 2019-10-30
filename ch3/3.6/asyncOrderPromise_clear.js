@@ -1,34 +1,44 @@
 const fs = require('fs');
 const boolean = true;
-const read = new Promise((res, rej) => {
-    if (boolean){
-        fs.readFile('3.6/readme2.txt', (err, data) => {
+const promise = new Promise((res, rej) => {
+    if (boolean) {
+        fs.readFile('ch3/3.6/readme2.txt', (err, data) => {
             if (err) {
                 throw err;
             }
-            res(data.toString());
+            res(data);
         });
     } else
         rej('fail');
-});
+    });
 
-read
-    .then((success) => {
-    console.log('1st', success);
-    return new Promise((res, rej) => {
-        res(success);
-      });
+promise
+    .then((data) => {
+    console.log('1st', data.toString());
+    return data;
+    //에러 안뜨면 res(data) 리턴됨
     })
-    .then((success2) => {
-    console.log('2st', success2);
-    return new Promise((res, rej) => {
-        res(success2);
-      });
+    .then((data2) => {
+    console.log('2st', data2.toString());
+    return data2;
     })
-    .then((success3) => {
-    console.log('3st', success3);
+    .then((data3) => {
+    console.log('3st', data3.toString());
     })
     .catch((err) => {
     console.error(err);
     });
 
+
+fs.readFile('ch3/3.6/readme2.txt', async (err, data) => {
+    try {
+        console.log('----------------async/await start ------------')
+        const read = await console.log('1st', data.toString());
+        const read2 = await console.log('2st', data.toString());
+        const read3 = await console.log('3st', data.toString());
+    } catch(err) {
+        throw err;
+    }
+});
+console.log('end');
+     
