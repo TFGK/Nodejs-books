@@ -1,0 +1,58 @@
+extends main
+
+block content
+  .div#add_con
+    form#add_content(action="/local", method="post" enctype="multipart/form-data")
+      img#img-preview(src='' style='display: none;' width='200' height='200' alt='미리보기')
+      br
+      input#img-url(type="hidden" name="url")
+      br
+      input#img(type="file" accept="image/*")       
+      br
+      br
+      h2 제목 입력 하셈
+      input#local_add_title(type="text" name="title" placeholder="제목 입력")
+      br
+      br
+      h2 내용 입력 하셈
+      input#local_add_content(type="text" name="content" placeholder="내용 입력" )
+      br
+      br
+      button(type="submit") 제출
+  script.
+    var contentMain = document.getElementById('content_main');
+    var title = document.getElementById('content_title');
+        contentMain.removeChild(title);
+    //add image form태그 스크립트
+    document.querySelector('#add_content').addEventListener('submit', function (e) {
+    var title = e.target.title.value;
+    var content = e.target.content.value;
+    if (!title) {
+        e.preventDefault();
+        window.alert('제목을 입력하세요');
+    } else if (!content) {
+        e.preventDefault();
+        window.alert('내용을 입력하세요');
+    } else {
+        window.alert('등록 완료');
+    }
+    });
+    //add image form태그 img버튼태그 스크립트//
+    document.getElementById('img').addEventListener('change', function (e) {
+      var formData = new FormData();
+      formData.append('img', this.files[0]);
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function () {  
+          if (xhr.status === 200) {
+              var url = JSON.parse(xhr.responseText).url;
+              document.getElementById('img-url').value = url;
+              document.getElementById('img-preview').src = url;
+              document.getElementById('img-preview').style.display = 'inline';
+          } else {
+              console.log(xhr.responseText);
+          }
+      };
+      xhr.open('POST', '/upload/img');
+      xhr.send(formData);
+    });
+        

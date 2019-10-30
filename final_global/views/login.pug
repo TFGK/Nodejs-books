@@ -1,0 +1,17 @@
+head
+  meta(charset='UTF-8')
+  title Global&apos;s Web
+  link(href='main.css' rel='stylesheet')
+body
+  #login
+    form.login-form(action="/auth/login" method="POST")
+      p.ptitle GLOBAL
+      .input-group
+        input#login-id(type='email' name='username' placeholder='이메일 입력') 
+      .input-group
+        input#login-password(type='password' name='password' placeholder='비밀번호 입력')
+      if loginError
+        .error-message= loginError
+      button#login-btn.btn(type='submit') Login
+      button#kakao-btn.btn(type='button' onclick="location.href='/auth/kakao'")
+      button#facebook-btn.btn(type='button' onclick="location.href='/auth/facebook'") 

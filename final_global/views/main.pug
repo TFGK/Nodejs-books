@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title Global&apos;s Web
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(href='/main.css' rel='stylesheet')
+  body
+    .row
+      #nav
+        ul#main_nav
+          li
+            a(href='/main') HOME
+          li
+            a(href='/team') WHO ARE WE
+          li
+            a(href='/local') IN FUKUOKA
+          li
+            a(href='faq') FAQ
+          li
+            a(href='/auth/logout') LOGOUT   
+          block nav
+      #content_main
+        h1#content_title Welcome to Team GLOBAL!
+        #content_sub
+          block content
+
+

@@ -1,0 +1,150 @@
+extends main
+
+block nav
+    li 
+        a(href="/faq/add") 문의하기
+block content
+    #content_faq
+        table#question-list
+            thead
+                tr
+                    th 번호
+                    th 제목
+                    th 작성일
+            tbody#question_body
+                for question in questions
+                    tr.question_view
+                        td#question_id= question.id
+                        td= question.title
+                        td= question.createdAt
+                    tr.question_description(style='display:none')
+                        td
+                        td
+                        td
+                    tr.question_comment(style='display:none')
+                        td
+                        td
+                        td
+                    tr.question_commentAdd(style='display:none')
+                        td
+                        td
+                        td
+
+    script.
+        window.onload = function(){
+            var contentMain = document.getElementById('content_main');
+            var title = document.getElementById('content_title');
+            contentMain.removeChild(title);
+            contentMain = document.getElementById('content_main');
+            //- getQuestion();
+        }
+
+        document.querySelectorAll('.question_view').forEach((el)=>{
+            el.addEventListener('click', ()=>{
+                var id = el.querySelector('td').textContent;
+                showDescription(id);
+            });
+        })
+        
+         function showDescription(id){
+            console.log(id);
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function(){
+                if(xhr.status === 200 || xhr.status === 201){
+                    var description = JSON.parse(xhr.responseText);
+                    var tr = document.querySelectorAll('.question_description')[id-1];
+                    tr.innerHTML=''; tr.style='display:lnline';
+                        var td = document.createElement('td');                
+                        td.textContent='내용'
+                        tr.appendChild(td);
+                        td = document.createElement('td');
+                        td.textContent = description.description;
+                        tr.appendChild(td);
+                        var btn_input = document.createElement('button');
+                        btn_input.textContent='댓글쓰기'; btn_input.id="btn_input"
+                        td = document.createElement('td');
+                        td.appendChild(btn_input);
+                        tr.appendChild(td);
+                        btn_input.addEventListener('click', ()=>{
+                            commentAdd(id)
+                        })
+                        showComment(id);
+                }else {
+                    console.error(xhr.responseText);
+                }
+            };
+            xhr.open('GET', 'faq/descriptions/'+id);
+            xhr.send();
+        }
+
+        function showComment(id){
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function(){
+                if(xhr.status === 200){
+                    var tbody = document.getElementById('question_body');
+                    var tr = document.querySelectorAll('.question_comment')[id-1];
+                    var comments = JSON.parse(xhr.responseText);
+                    comments.map((comment)=>{
+                        tr.innerHTML=''; tr.style='display:lnline';
+                        var td = document.createElement('td');
+                        td.textContent = '댓글';
+                        tr.appendChild(td);
+                        td = document.createElement('td');
+                        td.textContent = comment.comment;
+                        tr.appendChild(td);
+                        td = document.createElement('td');
+                        var btn_hide = document.createElement('button');
+                        btn_hide.textContent='접기';
+                        btn_hide.addEventListener('click', function() {
+                            hideDescription(id);
+                        });
+                        tr.appendChild(td);
+                        td.appendChild(btn_hide);
+                    });
+                    } else {
+                    console.error(xhr.responseText);
+                }
+            };
+            xhr.open('GET', 'faq/comments/'+id);
+            xhr.send();
+        }
+
+        function commentAdd(id){
+            var tr = document.querySelectorAll('.question_commentAdd')[id-1];
+            tr.innerHTML=''; tr.style='display:lnline';
+            var td = document.createElement('td');
+            tr.appendChild(td);
+            td = document.createElement('td');
+            // 두번째 td에 textarea로 입력받음
+            var form = document.createElement('form');  
+                form.action='/faq/comments'; form.method='post';
+                var textarea = document.createElement('textarea');
+                textarea.cols='30'; textarea.rows='10'; textarea.placeholder='댓글입력'; textarea.name='textarea';
+                var btn_save = document.createElement('button');
+                btn_save.type='submit'; btn_save.textContent='저장'; btn_save.id='btn_save'
+                tr.appendChild(td);
+                td.appendChild(form);
+                form.appendChild(textarea);
+                form.appendChild(btn_save);
+                form.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    var comment = e.target.textarea.value;
+                    if(!comment) return alert('내용을 입력하세요.');
+                    add(id, comment);
+                    e.target.textarea.value ='';
+            });
+        }
+
+        function add(id, comment){
+            var xhr = new XMLHttpRequest();
+                xhr.onload = function(){
+                    if(xhr.status === 201) {
+                        showDescription(id);
+                    }
+                    else console.error(xhr.responseText);
+                };
+                xhr.open('POST', '/faq/comments');
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.send(JSON.stringify({id: id, comment: comment}));
+                showDescription(id);
+        }

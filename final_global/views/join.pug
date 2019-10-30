@@ -1,0 +1,25 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Global&apos;s Web
+<<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Roboto&display=swap" rel="stylesheet">
+  link(href='main.css' rel='stylesheet')
+body
+    .join
+        form#join-form(action='/auth/join' method='post')
+                p.ptitle GLOBAL
+                .input-group
+                    input#join-email01(type='text' name='email1' placeholder='이메일 주소')
+                .input-group
+                    input#join-name(type='text' name='nick' placeholder='성명')
+                .input-group
+                    input#join-password(type='password' name='password' placeholder='비밀번호')
+                .input-group
+                    input#join-passwordCheck(type='password' name='passwordCheck' placeholder='비밀번호 확인')
+                .input-group
+                    input#join-tel(type='tel' name='tel' size='12' maxlength='12' autocomplete='off' placeholder='휴대폰 번호') 
+                if joinError
+                    .error-message= joinError
+                    button#join-btn.btn(type='submit') Register
+                    button#login-btn.btn(type='button')
+                        a(href="/login") LOGIN

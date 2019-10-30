@@ -1,0 +1,42 @@
+extends main
+
+block content
+    .content
+        form#team-form(action='/team' method='post' enctype='multipart/form-data')
+            .input-group
+                input#team-hakbun(type='number' name='hakbun' placeholder='학번')
+            .input-group
+                input#team-name(type='text', name='name' placeholder='이름')
+            .input-group
+                textarea#team-comment(name='comment' cols=40 rows=10 maxlength=140 placeholder='코멘트')
+            .input-group
+                img#img-preview(src='' style='display: none;' width='250', alt='미리보기')
+                input#img-url(type='hidden' name='url')
+            .input-group 
+                label(for='team-img') 프로필 사진
+                input#img.upload(type='file' accept='image/*')
+                button#team-btn.btn(type='submit') 추가
+    script.
+        window.onload = function(){
+            var contentMain = document.getElementById('content_main');
+            var title = document.getElementById('content_title');
+                contentMain.removeChild(title);
+        }
+
+        document.getElementById('img').addEventListener('change', function (e) {
+            var formData = new FormData();
+            formData.append('img', this.files[0]);
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var url = JSON.parse(xhr.responseText).url;
+                    document.getElementById('img-url').value = url;
+                    document.getElementById('img-preview').src = url;
+                    document.getElementById('img-preview').style.display = 'inline';
+                } else {
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.open('POST', '/team/img');
+            xhr.send(formData);
+        });

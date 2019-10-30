@@ -1,0 +1,128 @@
+extends main
+
+block nav
+    li 
+        a(href="/team/add") 조원추가
+block content
+    #content_team
+        script.
+            window.onload = function(){
+                var contentMain = document.getElementById('content_main');
+                var title = document.getElementById('content_title');
+                    contentMain.removeChild(title);
+                showTeam();
+            }
+
+            function showTeam(){ // 저장된 조원 출력
+                var xhr = new XMLHttpRequest();
+                    xhr.onload = function(){
+                        if(xhr.status===200){
+                            var teams = JSON.parse(xhr.responseText);
+                            var content = document.getElementById('content_sub');
+                            var content_team = document.createElement('content_team'); //div
+                            content.innerHTML = ''; content_team.id = 'content_team';
+                            teams.map(function(team){
+                                var img = document.createElement('img');
+                                img.src=team.img; img.width='250'; img.id=team.hakbun;
+                                img.addEventListener('click', function(){
+                                    getTeam(team.hakbun);
+                                });
+                                content_team.appendChild(img);
+                                content.appendChild(content_team);
+                            });
+                        } else {
+                            console.error(xhr.responseText);
+                        }
+                    };
+                    xhr.open('GET', '/team/load');
+                    xhr.send();
+            }
+
+            function getTeam(hakbun){ // 조원 사진을 클릭 했을때 데이터 출력
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function(){
+                    if(xhr.status === 200){
+                        var info[0] = JSON.parse(xhr.responseText);
+                        var content = document.getElementById('content_sub');
+                        content.innerHTML='';
+                            // 수정, 삭제 버튼 메뉴바에 추가
+                            var nav = document.getElementById('main_nav');
+                            var li = document.createElement('li');
+                            var a = document.createElement('a');
+                            li.id='patch'; a.textContent='수정'
+                            nav.appendChild(li); li.appendChild(a);
+                            
+                            var nav = document.getElementById('main_nav');
+                            var li = document.createElement('li');
+                            var a = document.createElement('a');
+                            li.id='delete'; a.textContent='삭제'
+                            nav.appendChild(li); li.appendChild(a);
+
+                            var img = document.createElement('img');
+                            img.src=info[0].img; img.width='250';
+                            img.addEventListener('click', function(){
+                                showTeam();
+                            // 다시 돌아갈때 수정, 삭제 버튼 삭제
+                            var li_patch = document.getElementById('patch');
+                            var li_del = document.getElementById('delete');
+                            nav.removeChild(li_patch); nav.removeChild(li_del);
+                            });
+                            // 조원 정보를 넣을 태그 생성
+                            var div = document.createElement('div');
+                            div.id='description';
+                            var h2 = document.createElement('h2');
+                            h2.textContent=info[0].name;
+                            var p = document.createElement('p');
+                            p.textContent=info[0].comment;
+                            content.append(div); 
+                            div.appendChild(img); div.appendChild(h2); div.appendChild(p);
+                            // 조원 삭제
+                        document.getElementById('delete').addEventListener('click', ()=>{
+                            var xhr = new XMLHttpRequest();
+                            xhr.onload = () =>{
+                                if(xhr.status === 200){    
+                                    showTeam();
+                                    var li_patch = document.getElementById('patch');
+                                    var li_del = document.getElementById('delete');
+                                    nav.removeChild(li_patch); nav.removeChild(li_del);
+                                }else {
+                                    console.error(xhr.responseText);
+                                }
+                            }
+                            xhr.open('DELETE', '/team/'+info[0][0].hakbun);
+                            xhr.send();
+                        });
+                        document.getElementById('patch').addEventListener('click', ()=>{
+                            var newName = prompt('바꿀 이름을 입력하세요.');
+                            var newComment = prompt('바꿀 내용을 입력하세요.');
+                            if(!newComment && newName){
+                                newComment = info[0].comment;
+                            }else if(!newName && newComment){
+                                newName = info[0].name;
+                            }else if (!newComment && !newName){
+                                return alert('바뀔 정보가 없습니다.');
+                            }
+                            var xhr = new XMLHttpRequest();
+                            xhr.onload = ()=>{
+                                if(xhr.status === 200){
+                                    getTeam(info[0].hakbun);
+                                    var li_patch = document.getElementById('patch');
+                                    var li_del = document.getElementById('delete');
+                                    nav.removeChild(li_patch); nav.removeChild(li_del);
+                                } else {
+                                    console.error(xhr.responseText);
+                                }
+                            };
+                            xhr.open('PATCH', '/team/'+info[0].hakbun);
+                            xhr.setRequestHeader('Content-Type', 'application/json');
+                            xhr.send(JSON.stringify({comment: newComment,
+                                                    name: newName,}));
+                        });
+                    } else{
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('GET', '/team/'+hakbun);
+                xhr.send(); 
+            }
+

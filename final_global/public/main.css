@@ -1,0 +1,508 @@
+*
+{
+	margin:0;
+	padding:0;
+	
+}
+
+body
+{	
+	overflow-x: hidden;
+	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/image/fukuokabuilding.jpg);
+	height: 100vh;
+    background-position: center;
+	font-family: 'Roboto', sans-serif;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+
+#nav{
+	border-bottom: 2px solid gray;
+}
+
+#nav ul{
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+#nav ul li{
+	padding: 20px;
+}
+
+#nav ul li:hover
+{
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+}
+
+.row
+{
+	max-width: 2000px;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+#content
+{
+	position: absolute;
+	width: 1500px;
+	margin-left: 0;
+	margin-top: 100px;
+}
+
+#content_title
+{
+	color: white;
+	text-transform: uppercase;
+	font-size: 70px;
+	text-align: center;
+	margin-top: 275px;
+}
+h1{
+	color: white;
+	text-transform: uppercase;
+	font-size: 70px;
+	text-align: center;
+	margin-top: 100px;
+}
+.button
+{
+	margin-top: 50px;
+	margin-left: 550px;
+}
+
+#profile-btn, #logout-btn
+{
+	border:  1px solid white;
+	padding: 20px 20px;
+	color: white;
+	margin-right: 55px;
+	font-size:17px;
+    text-transform: uppercase;
+	margin-top: 10px;
+}
+
+#join-btn, #login-btn, #faqAdd-btn {
+	border: none;
+	background-color: tomato;
+	border-radius: 40px 40px 40px 40px;;
+	color: white;
+	font-size:1.2rem;
+	text-transform: uppercase;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 222px;
+	height: 48px;
+	cursor: pointer;
+}
+#faqAdd-btn{
+	border: none;
+	background-color: tomato;
+	border-radius: 40px 40px 40px 40px;;
+	color: white;
+	font-size:1.2rem;
+	text-transform: uppercase;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 35%;
+	height: 48px;
+	cursor: pointer;
+	margin-top: 15px;
+}
+
+#team-btn{
+	border: none;
+	background-color: tomato;
+	border-radius: 40px 40px 40px 40px;;
+	color: white;
+	width: 100px;
+	height: 30px;
+}
+
+.btn-one:hover
+{
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+}
+
+.btn-two:hover
+{
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+}
+
+.join
+{
+	position: relative;
+	width: 260px;
+	margin: 100px auto 0 auto;
+	color: black;
+	text-transform: uppercase;
+	font-size:27px;
+	align-content: center;
+	border: 1px solid black;
+	border-radius: 20px 20px 20px 20px;
+	background: whitesmoke;
+	padding: 1rem;
+	align-items: center;
+}
+#join-form{
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+}
+
+input, textarea{
+	height: auto; /* 높이 초기화 */ 
+	line-height: normal; /* line-height 초기화 */
+	padding: .8em .5em; 
+	width: 100%;
+	border: none;
+	border-radius: 15px 15px 15px 15px;
+	margin-bottom: 1em;
+}
+textarea{
+	height: 120px;
+}
+#join-form #join-btn{
+	margin-bottom: 1em;
+}
+
+.error-message{
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+
+.ptitle
+{
+	text-align: center;
+	font-size: 3rem;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.btn:hover
+{
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+}
+
+#login
+{
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	width: 260px;
+	margin: 100px auto 0 auto;
+	color: black;
+	text-transform: uppercase;
+	font-size:27px;
+	align-content: center;
+	border: 1px solid black;
+	border-radius: 20px 20px 20px 20px;
+	background: whitesmoke;
+	padding: 1rem;
+}
+.login-form{
+	text-align: center;
+}
+.button{
+	width: 260px;
+}
+#facebook-btn{
+	margin-bottom: 10px;
+	background-image: url('./image/facebook_login.png');
+	height: 48px;
+	width: 222px;
+	border-radius: 50px 50px 50px 50px;
+	border: none;
+}
+
+#kakao-btn{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-image: url('./image/kakao_account_login_btn_medium_narrow.png');
+	height: 48px;
+	width: 222px;
+	border-radius: 50px 50px 50px 50px;
+	border: none;
+}
+#content_team{
+	margin-top: 15px;
+	display: flex;
+	flex-direction: row;
+}
+#content_faq{
+	margin-top: 50px;
+}
+.number{
+	width: 10%;
+	border-right: 2px solid gray;
+}
+.title{
+	width: 70%;
+	border-right: 2px solid gray;
+}
+.date{
+	width: 20%;
+}
+#description{
+	margin: auto auto;
+	display: flex;
+	flex-direction: column;
+}
+#description img, h2, p{
+	margin-bottom: 20px;
+}
+#description img{
+	margin-top: 30px;
+}
+#description h2{
+	text-align: center;
+	font-size: 3rem;
+	color: whitesmoke;
+}
+#description p{
+	width: 500px;
+	height: 70px;
+	background: rgba(245, 245, 245, 0.9);
+	border-radius: 10px 10px 10px 10px;
+	padding: 10px;
+	color: black;
+	font-size: 1.3rem;
+	margin: auto auto;
+}
+img{
+	margin: auto auto;
+	border-radius: 30px 30px 30px 30px;
+	border: 2px solid gray;
+	cursor: pointer;
+}
+
+#img-preview{
+	width: 150px;
+}
+
+.content{
+	position: relative;
+	width: 30%;
+	margin: 100px auto 0 auto;
+	color: black;
+	text-transform: uppercase;
+	font-size:27px;
+	align-content: center;
+	border: 1px solid black;
+	border-radius: 20px 20px 20px 20px;
+	background: whitesmoke;
+	padding: 1rem;
+}
+
+label{
+	color: black;
+	font-weight: bold;
+}
+
+#faq-btn{
+	width: 20%;
+	height: 50px;
+	margin: auto auto;
+	border-radius: 5px 5px 5px 5px;
+	border: none;
+	background-color: black;
+	color: white;
+	font-size: 1.5rem;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#question-list{
+	width: 80%;
+	margin: auto auto;
+	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 10px 10px 10px 10px;
+	border: none;
+}
+thead th:nth-child(1){
+	width: 10%;
+	border-radius: 10px 0px 0px 0px;
+}
+thead th:nth-child(3){
+	width: 20%;
+	border-radius: 0px 10px 0px 0px;
+}
+thead th{
+	padding: 10px;
+	background-color: rgba(255, 255, 255, 0.7);
+}
+td{
+	text-align: center;
+	height: 50px;
+}
+
+#faq-add{
+	position: relative;
+	width: 30%;
+	margin: 100px auto 0 auto;
+	color: black;
+	text-transform: uppercase;
+	font-size:27px;
+	align-content: center;
+	border: 1px solid black;
+	border-radius: 20px 20px 20px 20px;
+	background: whitesmoke;
+	padding: 1rem;
+}
+#form-faqAdd{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#des
+{
+	font-size: 1rem;
+	text-align: center;
+}
+/* 여기부터 후쿠오카 소개 페이지 css */
+
+/* 동영상 태그 */
+#content_sub{
+	display: block;
+}
+
+#fukuoka_title{
+	display: block;
+	font-size: 2rem;
+}
+
+
+/* 왼쪽 인덱스 사진과 제목 */
+/* 인덱스 전체 태그 */
+#content-one{
+	display: inline-block;
+	width : 40%;
+	margin-top: 2%;
+}
+/* 사진&제목 합친 영역 */
+#img_and_title{
+	display: inline-block;
+	padding: 3%;
+}
+
+/* 이미지 제목 */
+#index_title{
+	color: white;
+	width: 100%;
+	text-transform: uppercase;
+	font-size: 14px;
+	text-align: center;
+}
+
+
+/* 내용 컨텐츠 */
+#subcontainer{
+	display: inline-block;
+	float: right;
+	margin-top: 2%;
+	margin-right: 7%;
+	width: 50%;
+}
+
+/* 비디오임 */
+#local-one{
+	width: 100%;
+	height: 500px;
+	margin-top: 5rem;
+}
+
+/* 컨텐츠 추가 */
+#local_add_content{
+	width: 50%;
+}
+#local_add_title{
+	width: 50%;
+}
+
+/* 컨텐츠 제목, 내용 폰트 */
+
+#local_content_contents{
+	color: white;
+	text-transform: uppercase;
+	font-size: 28px;
+	text-align: left;
+	margin-top: 10px;
+}
+h3{
+	color: white;
+	text-transform: uppercase;
+	font-size: 30px;
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+/* 수정 삭제 홈 버튼 */
+#del{
+	border-radius:10px;
+	float: right;
+	margin-right: 1%;
+	border:  1px solid white;
+	padding: 20px 20px;
+	color: black;
+	font-size:17px;
+	 text-transform: uppercase;
+	
+ }
+ #update{
+	border-radius:10px;
+	float: right;
+	margin-right: 3%;
+	border:  1px solid white;
+	padding: 20px 20px;
+	color: black;
+	font-size:17px;
+	 text-transform: uppercase;
+ }
+ #back{
+	border-radius:10px;
+	float: left;
+	border:  1px solid white;
+	padding: 20px 20px;
+	color: black;
+	font-size:17px;
+	 text-transform: uppercase;
+ }
+ #back:hover, #update:hover, #del:hover
+ {
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+ }
+ .local_img{
+	 width: 500px;
+	 height: auto;
+ }
+/* 새로 추가했음!!! */ 
+ #go{
+	 background-color: rgba(245, 245, 245, 0.7);
+	 width: 30%;
+	 border-radius: 10px 10px 10px 10px;
+	 color: tomato;
+	 margin: auto auto;
+	 margin-top: 2rem;
+	 cursor: pointer;
+ }
+ #btn_save, #btn_input{
+	background-color: rgba(245, 245, 245, 0.7);
+	width: 30%;
+	height: 40px;
+	border-radius: 10px 10px 10px 10px;
+	color: tomato;
+	font-size: 1.1rem;
+	font-weight: bold;
+	margin: 10px auto 20px auto;
+	cursor: pointer;
+	border: none;
+ }

@@ -1,0 +1,33 @@
+extends main
+
+block content
+    h1 문의하기
+    #faq-add
+        form#form-faqAdd(action="/faq", method="POST")
+            input#title(type="text" placeholder='제목' name='title') 
+            textarea#description(cols="30", rows="10" placeholder='내용' name="description")
+            button#faqAdd-btn.btn(type='submit') 저장
+    script.
+        window.onload = function(){
+            var contentMain = document.getElementById('content_main');
+            var title = document.getElementById('content_title');
+            contentMain.removeChild(title);
+        }
+            //- document.getElementById('form-faqAdd').addEventListener('submit', (e)=>{
+            //-     e.preventDefault();
+            //-     var title = e.target.title.value;
+            //-     var description = e.target.description.value;
+            //-     if(!title) return alert('제목을 입력하세요');
+            //-     if(!description) return alert('내용을 입력하세요');
+
+            //-     var xhr = new XMLHttpRequest();
+            //-     xhr.onload = function(){
+            //-         if(xhr.status === 201) 
+            //-         else console.error(xhr.responseText);
+            //-     }
+            //-     xhr.open('POST', '/faq');
+            //-     xhr.setRequestHeader('Content-Type', 'application/json');
+            //-     xhr.send(JSON.stringify({title: title, description: description}));
+            //-     e.target.title.value = "";
+            //-     e.target.description.value = "";
+            //- });
